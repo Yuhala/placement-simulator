@@ -1,0 +1,21 @@
+-The folders contain the simulation results of different traces using different scheduling algorithms
+	-Minimum memory server first algorithm (results for these simulations are found in the min folder)
+	-Contiguous memory server first algorithm (results for these simulations are found in the contiguous folder)
+	-Maximum memory server first algorithm (results for these simulations are found in the max folder)
+-
+
+-All simulation results are written to csv files
+
+-The schema for the csv results files is as follows:
+
+	=========================================================================
+	|Column |  Value							|
+	=========================================================================
+	|1	|Number of VMs							|	
+	-------------------------------------------------------------------------						
+	|2	|Total number of servers					|
+	-------------------------------------------------------------------------						
+	|3	|Total number of servers used					|
+	-------------------------------------------------------------------------
+	|4	|Percentage of contiguous memory vms at the end of the simulation|	
+	=========================================================================
