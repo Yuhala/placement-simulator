@@ -65,8 +65,21 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {  
-   
+    public static void main(String[] args) throws IOException {     
+
+        /**
+         * Parse arguments:
+         * 1: use contiguity aware placement
+         * 2: use biggest server
+         * 3: use smallest server
+         */        
+         
+        if(args.length != 1){
+            System.out.println("./program-name #algo");
+            return;
+        }
+        int algo = Integer.parseInt(args[0]);
+        System.out.println("Algo: "+algo);
 
         pw = new FileWriter("test.csv", true);
 
@@ -81,7 +94,7 @@ public class Main {
         createServers();
         contiguousCount = 0;
         //ArrayList<Server> temp = serverTypes.get(i);
-        simulate(svList);
+        simulate(svList,algo);
         serversUsed = count(svList);
         percent = ((double) contiguousCount / (double) vmCount) * 100;
         writeResults(vmCount, NUM_SERVER, serversUsed, percent);
@@ -141,15 +154,6 @@ public class Main {
 
     public static void createServers() {
 
-        /*for (int i = 0; i < NUM_SERVER; i++) {
-           // hpc.add(new Server(1280, 24));
-            //gen2.add(new Server(320, 12));
-            //gen3.add(new Server(1280, 16));
-            //gen4.add(new Server(1920, 24));
-            //gen5.add(new Server(2560, 40));
-            //godzilla.add(new Server(5120,32));
-           //gen6.add(new Server(1920, 48));
-        }*/
         for (int i = 0; i < NUM_SERVER; i++) {
             svList.add(new Server(1920, 24));
         }
@@ -172,16 +176,6 @@ public class Main {
             svList.add(new Server(5120, 32));
         }*/
 
-        //serverTypes.add(hpc);
-        // serverTypes.add(gen2);
-        //serverTypes.add(gen3);
-        //serverTypes.add(gen4);
-        // serverTypes.add(gen5);
-        //serverTypes.add(godzilla);
-        // serverTypes.add(gen6);
-        /*  for (int i = 0; i < NUM_SERVER; i++) {
-            System.out.println(serverList.get(i).id);
-        }*/
     }
 
     public static void checkServers(VM vm, ArrayList<Server> serverList) {
@@ -195,7 +189,7 @@ public class Main {
 
     }
 
-    public static void simulate(ArrayList<Server> serverList) {
+    public static void simulate(ArrayList<Server> serverList, int algo) {
        
         VM tempVm=null;
         for (Event tempEvent: eventList) {           
@@ -208,9 +202,23 @@ public class Main {
             } else {//VM created
               tempVm = vmList.get(tempEvent.vmId);//Get VM corresponding to the event...O(1) 
                 checkServers(tempVm, serverList);
-               tempVm.chooseServer(possibleServers);
-                //tempVm.chooseSmallest(possibleServers);
-                //tempVm.chooseBiggest(possibleServers);
+                switch(algo){
+                    case 1:
+                        System.out.println("---Contiguity aware placement---");
+                        tempVm.chooseServer(possibleServers);
+                        break;
+                    
+                    case 2:
+                         System.out.println("---Choose server with max resources---");
+                         tempVm.chooseBiggest(possibleServers);
+                         break;
+
+                    case 3:
+                        System.out.println("---Choose server with min resources---");
+                        tempVm.chooseSmallest(possibleServers);
+                        break;
+                }                    
+                
                 if (tempVm.contiguousMem) {
                     contiguousCount++;
                 }// serverTypes.add(gen5);  
@@ -219,41 +227,7 @@ public class Main {
 
         }
 
-        /*int size = vmList.size();
-        int startTimestamp = vmList.get(0).created;
-        VM tempVM;
-        ArrayList<Integer> delIndices = new ArrayList<Integer>();
-        for (int i = startTimestamp; i <= maxTimestamp; i++) {
-            delIndices.clear();
-            for (int j = 0; j < vmList.size(); j++) {
-                tempVM = vmList.get(j);
-                if (tempVM.created == i) {
-                    //Host the given vm
-                    checkServers(tempVM, serverList);
-                    tempVM.chooseServer(possibleServers);
-                    //tempVM.chooseSmallest(possibleServers);
-                    //tempVM.chooseBiggest(possibleServers);
-                    if (tempVM.contiguousMem) {
-                        contiguousCount++;
-                    }// serverTypes.add(gen5);
-
-                }
-                if (tempVM.deleted == i) {
-
-                    //Remove the given vm from the system
-                    tempVM.hostingServer.removeVM(tempVM);
-                    delIndices.add(j);
-
-                }
-            }
-
-            for (int k = 0; k < delIndices.size(); k++) {
-                if (k < vmList.size()) {
-                    vmList.remove(k);
-                }
-            }
-
-        }*/
+       
 
     }
 

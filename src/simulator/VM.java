@@ -68,7 +68,7 @@ public class VM {
            
         }
         if (!found && serversOff.size() > 0) {
-            this.hostingServer = serversOff.get(0);
+            this.hostingServer = serversOff.get(0);           
             
         }
          
@@ -108,12 +108,11 @@ public class VM {
         }
 
         if (!found && serversOff.size() > 0) {
-            this.hostingServer = serversOff.get(0);
+            this.hostingServer = serversOff.get(0);            
         }
 
         this.hostingServer.addVM(this);
-       // int start = this.hostingServer.findBlock(this);
-
+        
     }
 
     public void chooseSmallest(ArrayList<Server> list) {
@@ -134,7 +133,7 @@ public class VM {
         }
        
         if (serversOn.size() > 0) {
-             double minMem = serversOn.get(0).availableMem;
+            double minMem = serversOn.get(0).availableMem;
             found = true;
             for (int i = 0; i < serversOn.size(); i++) {
 
@@ -148,10 +147,10 @@ public class VM {
         }
         if (!found && serversOff.size() > 0) {
             this.hostingServer = serversOff.get(0);
-        }
+            
+        }      
 
         this.hostingServer.addVM(this);
-       // int start = this.hostingServer.findBlock(this);
-
+        
     }
 }
