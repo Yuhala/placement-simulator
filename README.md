@@ -13,7 +13,11 @@ cd placement-simulator && make
 
 ```
 - The traces used for simulation are in the file `vmtable.csv`.
-- Run placement simulation with the provided script: `run.sh`.
+- Run placement simulation with the provided script: 
+```
+./run.sh
+
+```
 - By default algo 1: contiguous placement is chosen. You can change this option in the `run.sh` file to use the other placement algorithms.
 - At the end of simulation, the number of VMs, total number of servers (in data center), total number of servers used, and percentage of VMs with contiguous memory during their lifetimes is outputed.
 - Other options like total number of servers can be modified in the `Main.java` file in `src/simulator` directory.
