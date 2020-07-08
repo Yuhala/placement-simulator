@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author peterson
+ * @author Peterson Yuhala
  */
 public class VM {
     public static final double SLOT_SIZE = 100;

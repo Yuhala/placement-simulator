@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author peterson
+ * @author Peterson Yuhala
  */
 public class Server {
 

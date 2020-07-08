@@ -7,7 +7,7 @@ package simulator;
 
 /**
  *
- * @author peterson
+ * @author Peterson Yuhala
  */
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -81,7 +81,7 @@ public class Main {
         int algo = Integer.parseInt(args[0]);
         System.out.println("Algo: "+algo);
 
-        pw = new FileWriter("test.csv", true);
+        pw = new FileWriter("sim-results.csv", true);
 
         System.out.println("Starting simulation....");
         readCSV();
