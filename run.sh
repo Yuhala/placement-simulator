@@ -7,10 +7,11 @@
 ALGO=1
 RES_FILE=sim-results.csv
 
+cd src/classes
+
 # remove old results if exist
 rm $RES_FILE
 
-cd src/classes
 java simulator.Main $ALGO
 
 # print results
